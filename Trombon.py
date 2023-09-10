@@ -14,12 +14,14 @@ def create_deck():
     ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     suits = ['♥', '♦', '♣', '♠']
     deck = [(rank, suit) for rank in ranks for suit in suits]
+    
     return deck
 
 deck = create_deck()
 num_cards = len(deck)
 
 def shuffle_deck(deck):
+    
     return random.shuffle(deck)
 
 def deal_cards(deck, players):
@@ -47,7 +49,6 @@ def game_setup():
 def check_quads():
     global players
 
-    # create a dictionary how many times a certain element is in the list
     count_dict = {}
 
     for item in players[current_player]['hand']:
@@ -88,6 +89,7 @@ def new_turn():
 
 def player_actions():
     global cards_on_table, current_player, players, selected_cards, claimed_card, turn_ended, game_over
+    
     turn_ended = False
     if current_player > len(players) - 1:
         current_player = 0
@@ -104,9 +106,11 @@ def player_actions():
             if len(players[current_player - 1]['hand']) == 0:
                 print(players[current_player - 1]['username'] + " wins!")
                 game_over = True
+                
                 return game_over
             current_player = (current_player + 1) % num_players
             turn_ended = True
+            
             return current_player, turn_ended
         else:
             print("Selected cards do not have the same value as the claimed card.")
@@ -117,6 +121,7 @@ def player_actions():
             print(players[previous_player]['username'] + " draws the cards on table.")
             cards_on_table = []
             turn_ended = True
+            
             return current_player, turn_ended
     else:
         if len(players[current_player - 1]['hand']) == 0:
